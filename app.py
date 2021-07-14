@@ -10,7 +10,7 @@ inventory = pd.read_excel('./files/Inventory.xlsx')
 
 sale = pd.read_excel('./files/Sales.xlsx')
 
-st.title('Sahil\'s Store')
+st.title('Utsav\'s Store')
 
 st.header('_Inventory & Sales_')
 
