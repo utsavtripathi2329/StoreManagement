@@ -6,9 +6,9 @@ date = date.today()
 
 dateStr = date.strftime("%d-%m-%Y")
 
-inventory = pd.read_excel('/files/Inventory.xlsx')
+inventory = pd.read_excel('./files/Inventory.xlsx')
 
-sale = pd.read_excel('/files/Sales.xlsx')
+sale = pd.read_excel('./files/Sales.xlsx')
 
 st.title('Sahil\'s Store')
 
@@ -35,16 +35,16 @@ with st.form("sales",clear_on_submit = True):
         inv_upd = pd.DataFrame({'Quantity': [curr_qty - item_qty]}, index=[Item_Code])
         inventory.update(inv_upd)
 
-inventory.to_excel('/files/Inventory.xlsx', index=False)
+inventory.to_excel('./files/Inventory.xlsx', index=False)
 
 st.sidebar.write('Inventory')
 st.sidebar.dataframe(inventory.loc[:,'Item':'Price'])
 
-sale.to_excel('/files/Sales.xlsx', index=False)
+sale.to_excel('./files/Sales.xlsx', index=False)
 
 st.subheader(f'Sale Summary for {dateStr}:')
 
-sale_summary = pd.read_excel('/files/Sales.xlsx')
+sale_summary = pd.read_excel('./files/Sales.xlsx')
 
 sale_summary_today = sale_summary[sale_summary['Date']==dateStr]
 st.dataframe(sale_summary_today.loc[:,'Item Code':'Amount'])
