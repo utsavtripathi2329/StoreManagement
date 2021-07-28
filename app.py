@@ -1,6 +1,23 @@
 import streamlit as st
 from datetime import date
 import pandas as pd
+from google.oauth2 import service_account
+from gsheetsdb import connect
+
+# Create a connection object.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+    ],
+)
+conn = connect(credentials=credentials)
+
+sheet_url = st.secrets["private_gsheets_url"]
+rows = run_query(f'SELECT * FROM "{sheet_url}"')
+
+for row in rows:
+    st.write(f"{row.name} has a :{row.pet}:")
 
 date = date.today()
 
